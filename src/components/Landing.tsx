@@ -92,11 +92,18 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
       } gap-12 items-center max-w-6xl mx-auto px-4 py-20`}
     >
       <div className="flex-1">
-        <div className="text-blue-500 text-5xl mb-6">
-          <FontAwesomeIcon
-            icon={icon}
-            className="transform transition-transform group-hover:scale-110"
-          />
+        <div className="group mb-6">
+          <div className="relative">
+            {/* Subtle Glow Background */}
+            <div className="absolute inset-0 bg-blue-500/5 blur-xl rounded-full group-hover:bg-blue-500/10 transition-all duration-300" />
+            {/* Icon Container */}
+            <div className="relative h-16 w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
+              <FontAwesomeIcon
+                icon={icon}
+                className="text-3xl text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
+              />
+            </div>
+          </div>
         </div>
         <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
           {title}
