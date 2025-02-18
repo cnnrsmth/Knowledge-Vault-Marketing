@@ -160,22 +160,27 @@ const Landing: React.FC = () => {
                 {
                   icon: faWandMagicSparkles,
                   label: "Get Instant Book Summaries",
+                  sectionId: "instant-summaries",
                 },
                 {
                   icon: faBookOpen,
                   label: "Store Book Summaries In Your Vault",
+                  sectionId: "knowledge-vault",
                 },
                 {
                   icon: faLightbulb,
                   label: "Ask Your Vault Questions",
+                  sectionId: "ask-vault",
                 },
                 {
                   icon: faSearch,
                   label: "Easily Find Content That Matters",
+                  sectionId: "dynamic-search",
                 },
                 {
                   icon: faHome,
                   label: "Personalise Everything To Your Needs",
+                  sectionId: "personalized-home",
                 },
               ].map((item, index) => (
                 <motion.div
@@ -183,7 +188,12 @@ const Landing: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 + index * 0.1 }}
-                  className="group flex flex-col items-center gap-3"
+                  className="group flex flex-col items-center gap-3 cursor-pointer"
+                  onClick={() => {
+                    document
+                      .getElementById(item.sectionId)
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
                   <div className="relative">
                     {/* Subtle Glow Background */}
@@ -248,7 +258,10 @@ const Landing: React.FC = () => {
 
         <div className="relative">
           {/* Feature sections remain the same but with added visual separators */}
-          <div className="border-t border-gray-800/50 backdrop-blur-sm">
+          <div
+            id="instant-summaries"
+            className="border-t border-gray-800/50 backdrop-blur-sm"
+          >
             <FeatureSection
               icon={faWandMagicSparkles}
               title="AI Book Summaries: Your Content, Captured Instantly"
@@ -256,7 +269,7 @@ const Landing: React.FC = () => {
             />
           </div>
 
-          <div className="border-t border-gray-800">
+          <div id="knowledge-vault" className="border-t border-gray-800">
             <FeatureSection
               icon={faBookOpen}
               title="Your Knowledge Vault: A Home for All Your Book Summaries"
@@ -265,7 +278,7 @@ const Landing: React.FC = () => {
             />
           </div>
 
-          <div className="border-t border-gray-800">
+          <div id="ask-vault" className="border-t border-gray-800">
             <FeatureSection
               icon={faLightbulb}
               title="Ask Your Vault: Connect Ideas Across Your Content"
@@ -273,7 +286,7 @@ const Landing: React.FC = () => {
             />
           </div>
 
-          <div className="border-t border-gray-800">
+          <div id="dynamic-search" className="border-t border-gray-800">
             <FeatureSection
               icon={faSearch}
               title="Dynamic Search & Smart Filters: Find What Matters Fast"
@@ -282,7 +295,7 @@ const Landing: React.FC = () => {
             />
           </div>
 
-          <div className="border-t border-gray-800">
+          <div id="personalized-home" className="border-t border-gray-800">
             <FeatureSection
               icon={faHome}
               title="A Personalized Home for Your Knowledge"
