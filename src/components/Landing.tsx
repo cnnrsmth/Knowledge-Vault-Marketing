@@ -258,18 +258,18 @@ const Landing: React.FC = () => {
 
           <div className="border-t border-gray-800">
             <FeatureSection
-              icon={faBrain}
-              title="Ask Your Vault: Connect Ideas Across Your Content"
-              description="Use AI-powered chat to ask questions and uncover insights hidden across your content. Connect themes, ideas, and concepts across all the books you've consumed, like having a smart personal assistant for your knowledge."
+              icon={faBookOpen}
+              title="Your Knowledge Vault: A Home for All Your Book Summaries"
+              description="Never lose track of what you've read again. Store all your book summaries, key takeaways, quotes and notes in a sleek Vault. Keep your learning journey all in one place."
               isReversed
             />
           </div>
 
           <div className="border-t border-gray-800">
             <FeatureSection
-              icon={faUserGear}
-              title="Human-in-the-Loop: Tailor Your Content, Your Way"
-              description="AI doesn't know you, like you know you. Edit and refine AI-generated summaries, notes, or key points to ensure they capture the essence as you recall it."
+              icon={faLightbulb}
+              title="Ask Your Vault: Connect Ideas Across Your Content"
+              description="Use AI-powered chat to ask questions and uncover insights hidden across your content. Connect themes, ideas, and concepts across all the books you've consumed, like having a smart personal assistant for your knowledge."
             />
           </div>
 
@@ -277,7 +277,7 @@ const Landing: React.FC = () => {
             <FeatureSection
               icon={faSearch}
               title="Dynamic Search & Smart Filters: Find What Matters Fast"
-              description="Navigate your knowledge effortlessly with dynamic search, and intelligent filters - ensuring your content stays organised and easy to explore."
+              description="Effortlessly navigate your Vault with powerful search and filters. Whether you're looking for detailed notes, key quotes that resonate, or the most impactful takeaways, find exactly what you need — fast."
               isReversed
             />
           </div>
@@ -286,7 +286,7 @@ const Landing: React.FC = () => {
             <FeatureSection
               icon={faHome}
               title="A Personalized Home for Your Knowledge"
-              description="Make Knowledge Vault your own with a fully customizable UI. Choose layouts, preferences, and themes that suit your style, so your second brain feels like home."
+              description="Make Knowledge Vault your own with a fully customizable UI. Choose layouts, preferences, and themes that suit your style, so you feel at home."
             />
           </div>
         </div>
