@@ -142,11 +142,11 @@ const Landing: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Knowledge Vault
+              One Vault to Rule Them All
             </h1>
             <p className="text-xl md:text-2xl text-gray-400">
               Effortlessly connect insights across your all the books you've
-              read, and grow your wisdom with every read.
+              read. Summarise Your Books, Ask Them Questions, Unlock Insights.
             </p>
           </motion.div>
 
