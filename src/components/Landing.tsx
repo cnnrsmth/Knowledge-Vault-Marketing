@@ -3,16 +3,13 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookOpen,
-  faQuoteLeft,
-  faPencil,
-  faBrain,
   faLightbulb,
   faSearch,
   faWandMagicSparkles,
-  faUserGear,
   faHome,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import Navbar from "./Navbar";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -120,6 +117,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
 const Landing: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      <Navbar />
       {/* Add the keyframes to the page */}
       <style>{glowingBorderKeyframes}</style>
 
@@ -155,7 +153,7 @@ const Landing: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-gray-400 text-lg flex flex-col items-center"
+            className="text-gray-400 text-lg flex flex-col items-center benefits-section"
           >
             <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mb-8">
               Key Benefits
@@ -248,7 +246,7 @@ const Landing: React.FC = () => {
                     className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 backdrop-blur-sm"
                   />
                 </div>
-                <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
+                <button className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
                   Join Waitlist
                 </button>
               </div>
@@ -351,7 +349,7 @@ const Landing: React.FC = () => {
                       className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 backdrop-blur-sm"
                     />
                   </div>
-                  <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
+                  <button className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
                     Join Waitlist
                   </button>
                 </div>
