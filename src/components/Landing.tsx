@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookOpen,
@@ -8,8 +8,11 @@ import {
   faWandMagicSparkles,
   faHome,
   faChevronDown,
+  faCheck,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
+import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -189,6 +192,76 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
   );
 };
 
+// Email Input Component
+const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
+  const [email, setEmail] = useState("");
+  const { submitEmail, isLoading, error, success } = useWaitlistSubmission();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    submitEmail(email);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={`${className} relative`}>
+      <div className="flex gap-2 w-full relative">
+        <div className="relative flex-1">
+          {/* Glowing border beam effect */}
+          <div
+            className="absolute h-[2px] w-[200px] top-0 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 overflow-hidden"
+            style={{
+              animation: "borderBeam 8s ease-in-out infinite",
+            }}
+          />
+          <div className="relative">
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 backdrop-blur-sm"
+              disabled={isLoading}
+            />
+            {/* Status Icons */}
+            <AnimatePresence>
+              {(success || error) && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  className="absolute right-3 inset-y-0 flex items-center"
+                >
+                  <div
+                    className={`h-5 w-5 flex items-center justify-center rounded-full ${
+                      success ? "bg-green-500/20" : "bg-red-500/20"
+                    }`}
+                  >
+                    <FontAwesomeIcon
+                      icon={success ? faCheck : faXmark}
+                      className={`text-xs ${
+                        success ? "text-green-500" : "text-red-500"
+                      }`}
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed ${
+            isLoading ? "animate-pulse" : ""
+          }`}
+        >
+          {isLoading ? "Joining..." : "Join Waitlist"}
+        </button>
+      </div>
+    </form>
+  );
+};
+
 const Landing: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
@@ -323,27 +396,7 @@ const Landing: React.FC = () => {
               <span className="text-sm pb-8 text-gray-500">
                 Be the first to know when we launch
               </span>
-              <div className="flex gap-2 w-full max-w-md relative mb-8">
-                <div className="relative flex w-full gap-2">
-                  <div className="relative flex-1">
-                    {/* Glowing border beam effect */}
-                    <div
-                      className="absolute h-[2px] w-[200px] top-0 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 overflow-hidden"
-                      style={{
-                        animation: "borderBeam 8s ease-in-out infinite",
-                      }}
-                    />
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 backdrop-blur-sm"
-                    />
-                  </div>
-                  <button className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
-                    Join Waitlist
-                  </button>
-                </div>
-              </div>
+              <EmailInput className="w-full max-w-md mb-8" />
             </motion.div>
           </motion.div>
 
@@ -426,27 +479,7 @@ const Landing: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex flex-col items-center"
               >
-                <div className="flex gap-2 w-full max-w-md relative mb-8">
-                  <div className="relative flex w-full gap-2">
-                    <div className="relative flex-1">
-                      {/* Glowing border beam effect */}
-                      <div
-                        className="absolute h-[2px] w-[200px] top-0 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 overflow-hidden"
-                        style={{
-                          animation: "borderBeam 8s ease-in-out infinite",
-                        }}
-                      />
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 backdrop-blur-sm"
-                      />
-                    </div>
-                    <button className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm">
-                      Join Waitlist
-                    </button>
-                  </div>
-                </div>
+                <EmailInput className="w-full max-w-md mb-8" />
               </motion.div>
             </motion.div>
           </div>

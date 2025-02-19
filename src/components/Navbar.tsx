@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/Favicon2.png"; // Adjust path based on location
+import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [email, setEmail] = useState("");
+  const { submitEmail, isLoading, error, success } = useWaitlistSubmission();
 
   // Handle scroll effect
   useEffect(() => {
@@ -20,6 +23,18 @@ const Navbar: React.FC = () => {
   const scrollToBenefits = () => {
     const benefitsSection = document.querySelector(".benefits-section");
     benefitsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submitEmail(email);
+    if (!error) {
+      // Close modal after successful submission with a small delay
+      setTimeout(() => {
+        setShowEmailInput(false);
+        setEmail(""); // Reset email input
+      }, 1500);
+    }
   };
 
   return (
@@ -89,16 +104,51 @@ const Navbar: React.FC = () => {
               <h3 className="text-xl font-bold text-white mb-4">
                 Join the Waitlist
               </h3>
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500"
-                />
-                <button className="mt-4 w-full px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors text-white">
-                  Join Waitlist
+              <form onSubmit={handleSubmit} className="relative">
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-gray-500"
+                    disabled={isLoading}
+                  />
+                  {/* Status Icons */}
+                  <AnimatePresence>
+                    {(success || error) && (
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
+                        className="absolute right-3 inset-y-0 flex items-center"
+                      >
+                        <div
+                          className={`h-5 w-5 flex items-center justify-center rounded-full ${
+                            success ? "bg-green-500/20" : "bg-red-500/20"
+                          }`}
+                        >
+                          <FontAwesomeIcon
+                            icon={success ? faCheck : faXmark}
+                            className={`text-xs ${
+                              success ? "text-green-500" : "text-red-500"
+                            }`}
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className={`mt-4 w-full px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors text-white disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isLoading ? "animate-pulse" : ""
+                  }`}
+                >
+                  {isLoading ? "Joining..." : "Join Waitlist"}
                 </button>
-              </div>
+              </form>
             </motion.div>
           </motion.div>
         )}
