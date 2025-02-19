@@ -330,7 +330,7 @@ const Landing: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
                 One Vault to Rule Them All
               </h1>
               <p className="text-xl md:text-2xl text-gray-400">
@@ -495,8 +495,8 @@ const Landing: React.FC = () => {
                 Ready to Supercharge Your Learning?
               </h2>
               <p className="text-gray-400 text-lg">
-                Join thousands of learners who are capturing and connecting
-                their knowledge more effectively.
+                Provide your email and we'll inform you as soon as we're ready
+                to launch!
               </p>
               {/* Email Section */}
               <motion.div

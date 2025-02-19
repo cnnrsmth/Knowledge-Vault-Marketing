@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../assets/Favicon2.png"; // Adjust path based on location
+import Logo from "../assets/logo.png"; // Adjust path based on location
 import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 
 const Navbar: React.FC = () => {
