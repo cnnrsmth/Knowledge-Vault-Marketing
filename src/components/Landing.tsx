@@ -39,12 +39,36 @@ const glowingBorderKeyframes = `
 
 // Replace diagonal pattern with network animation
 const networkPattern = `
+  @keyframes networkPulse {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.7;
+      filter: brightness(0.8);
+    }
+  }
+
+  @keyframes subtleFloat {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-10px, -10px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
   .network-grid {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
+    animation: networkPulse 8s ease-in-out infinite;
   }
 
   .network-grid::before {
@@ -63,7 +87,8 @@ const networkPattern = `
       radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%),
       linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 100%);
     mask-composite: intersect;
-    animation: subtleFloat 20s infinite linear;
+    animation: subtleFloat 20s ease-in-out infinite;
+    transition: opacity 0.3s ease-in-out;
   }
 
   .floating-orbs {
