@@ -635,7 +635,7 @@ const Landing: React.FC = () => {
               transition={{ delay: 1.2, duration: 0.8 }}
               className="flex flex-col items-center px-2 sm:px-0 mb-16 sm:mb-0"
             >
-              <span className="text-sm pb-6 sm:pb-8 text-gray-500">
+              <span className="text-sm pb-4 sm:pb-4 text-gray-500">
                 Be the first to know when we launch
               </span>
               <EmailInput className="w-full max-w-md mb-6 sm:mb-8" />
