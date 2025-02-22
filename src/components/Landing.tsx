@@ -14,7 +14,8 @@ import {
 import Navbar from "./Navbar";
 import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 import BrainImage from "../assets/Brain.png";
-import FluidOrbBlue from "./FluidOrbBlue";
+import FluidOrbWithThemes from "./FluidOrbWithThemes";
+import { useInView } from "react-intersection-observer";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -330,6 +331,7 @@ interface FeatureSectionProps {
   description: string;
   isReversed?: boolean;
   isFirstSection?: boolean;
+  index: number;
 }
 
 const FeatureSection: React.FC<FeatureSectionProps> = ({
@@ -338,25 +340,50 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
   description,
   isReversed,
   isFirstSection,
+  index,
 }) => {
   const isAskVault = title.includes("Ask Your Vault");
+  const themeIndex = index % 2 === 0 ? 0 : 3;
+  const [ref, isInView] = useInView({
+    rootMargin: "-10% 0px -10% 0px",
+    triggerOnce: false,
+  });
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8 }}
+      ref={ref}
+      initial={{
+        opacity: 0,
+        x: isReversed ? 100 : -100,
+      }}
+      animate={{
+        opacity: isInView ? 1 : 0,
+        x: isInView ? 0 : isReversed ? 100 : -100,
+      }}
+      transition={{
+        duration: 0.8,
+        ease: "easeInOut",
+      }}
       className={`flex flex-col ${
         isReversed ? "md:flex-row-reverse" : "md:flex-row"
       } gap-12 items-center max-w-6xl mx-auto px-4 py-20`}
     >
-      <div className="flex-1">
+      <motion.div
+        className="flex-1"
+        initial={{ opacity: 0, x: isReversed ? 50 : -50 }}
+        animate={{
+          opacity: isInView ? 1 : 0,
+          x: isInView ? 0 : isReversed ? 50 : -50,
+        }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+          ease: "easeInOut",
+        }}
+      >
         <div className="group mb-6">
           <div className="relative">
-            {/* Subtle Glow Background */}
             <div className="absolute inset-0 transition-all duration-300" />
-            {/* Icon Container */}
             <div className="relative h-16 w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
               <FontAwesomeIcon
                 icon={icon}
@@ -369,11 +396,22 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
           {title}
         </h2>
         <p className="text-gray-400 text-lg leading-relaxed">{description}</p>
-      </div>
-      <div className="flex-1 relative flex items-center justify-center">
+      </motion.div>
+      <motion.div
+        className="flex-1 relative flex items-center justify-center"
+        initial={{ opacity: 0, x: isReversed ? -50 : 50 }}
+        animate={{
+          opacity: isInView ? 1 : 0,
+          x: isInView ? 0 : isReversed ? -50 : 50,
+        }}
+        transition={{
+          duration: 0.8,
+          delay: 0.4,
+          ease: "easeInOut",
+        }}
+      >
         {isFirstSection ? (
           <>
-            {/* Background Pattern Container */}
             <div className="absolute inset-0 bg-black rounded-xl overflow-hidden">
               <div
                 className="absolute inset-0"
@@ -384,31 +422,16 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
                 }}
               />
             </div>
-
-            {/* Brain Image Container with Glow Effect */}
-            <div className="relative aspect-video flex items-center justify-center bg-transparent rounded-xl p-8 backdrop-blur-sm border-gray-700/50 transition-all">
-              <div className="brain-container">
-                <div className="brain-glow" />
-                <div className="expanding-circle"></div>
-                <div className="expanding-circle"></div>
-                <img
-                  src={BrainImage}
-                  alt="AI Brain"
-                  className="relative w-48 h-48 object-contain z-10"
-                />
-              </div>
+            <div className="flex items-center justify-center">
+              <FluidOrbWithThemes themeIndex={themeIndex} />
             </div>
           </>
-        ) : isAskVault ? (
-          <div className="flex items-center justify-center">
-            <FluidOrbBlue />
-          </div>
         ) : (
-          <div className="bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm border border-gray-700/50 transform transition-all hover:scale-105 hover:border-blue-500/50">
-            <div className="aspect-video bg-gray-900/50 rounded-lg"></div>
+          <div className="flex items-center justify-center">
+            <FluidOrbWithThemes themeIndex={themeIndex} />
           </div>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -514,23 +537,24 @@ const Landing: React.FC = () => {
         <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-[100] backdrop-blur-[2px]" />
 
         {/* Hero Section */}
-        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20">
+        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl flex flex-col justify-between h-[70vh]"
+            className="text-center w-full max-w-3xl mx-auto flex flex-col justify-between min-h-[60vh] sm:h-[70vh] mt-16 sm:mt-0"
           >
             {/* Title Group */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent px-2 sm:px-0">
                 One Vault to Rule Them All
               </h1>
-              <p className="text-xl md:text-2xl text-gray-400">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-400 px-2 sm:px-0">
                 Summarise your books, ask them questions, and effortlessly
                 connect ideas to unlock new insights.
               </p>
@@ -541,14 +565,14 @@ const Landing: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-gray-400 text-lg flex flex-col items-center benefits-section"
+              className="text-gray-400 text-lg flex flex-col items-center benefits-section px-2 sm:px-0"
             >
               <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mb-8">
                 Key Benefits
               </span>
 
               {/* Book Features Icons */}
-              <div className="flex justify-center gap-16 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row justify-center gap-6 sm:gap-8 md:gap-16 mb-8">
                 {[
                   {
                     icon: faWandMagicSparkles,
@@ -589,18 +613,15 @@ const Landing: React.FC = () => {
                     }}
                   >
                     <div className="relative">
-                      {/* Subtle Glow Background */}
                       <div className="absolute inset-0 bg-blue-500/5 blur-xl rounded-full group-hover:bg-blue-500/10 transition-all duration-300" />
-
-                      {/* Icon Container */}
-                      <div className="relative h-16 w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
+                      <div className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
                         <FontAwesomeIcon
                           icon={item.icon}
-                          className="text-3xl text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
+                          className="text-2xl sm:text-3xl text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
                         />
                       </div>
                     </div>
-                    <span className="text-sm font-medium text-gray-400/90 group-hover:text-white transition-colors duration-300">
+                    <span className="text-xs sm:text-sm font-medium text-gray-400/90 group-hover:text-white transition-colors duration-300 text-center">
                       {item.label}
                     </span>
                   </motion.div>
@@ -613,12 +634,12 @@ const Landing: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center px-2 sm:px-0"
             >
-              <span className="text-sm pb-8 text-gray-500">
+              <span className="text-sm pb-6 sm:pb-8 text-gray-500">
                 Be the first to know when we launch
               </span>
-              <EmailInput className="w-full max-w-md mb-8" />
+              <EmailInput className="w-full max-w-md mb-6 sm:mb-8" />
             </motion.div>
           </motion.div>
 
@@ -638,6 +659,7 @@ const Landing: React.FC = () => {
                 title="AI Book Summaries: Your Content, Captured Instantly"
                 description="Get clear, concise summaries of every book you consume. Includes imagery, key learnings, quotes, and detailed notes, all generated by AI to save you time and effort."
                 isFirstSection={true}
+                index={0}
               />
             </div>
 
@@ -647,6 +669,7 @@ const Landing: React.FC = () => {
                 title="Your Knowledge Vault: A Home for All Your Book Summaries"
                 description="Never lose track of what you've read again. Store all your book summaries, key takeaways, quotes and notes in a sleek Vault. Keep your learning journey all in one place."
                 isReversed
+                index={1}
               />
             </div>
 
@@ -655,6 +678,7 @@ const Landing: React.FC = () => {
                 icon={faLightbulb}
                 title="Ask Your Vault: Connect Ideas Across Your Content"
                 description="Use AI-powered chat to ask questions and uncover insights hidden across your content. Connect themes, ideas, and concepts across all the books you've consumed, like having a smart personal assistant for your knowledge."
+                index={2}
               />
             </div>
 
@@ -664,6 +688,7 @@ const Landing: React.FC = () => {
                 title="Dynamic Search & Smart Filters: Find What Matters Fast"
                 description="Effortlessly navigate your Vault with powerful search and filters. Whether you're looking for detailed notes, key quotes that resonate, or the most impactful takeaways, find exactly what you need — fast."
                 isReversed
+                index={3}
               />
             </div>
 
@@ -672,6 +697,7 @@ const Landing: React.FC = () => {
                 icon={faHome}
                 title="A Personalized Home for Your Knowledge"
                 description="Make Knowledge Vault your own with a fully customizable UI. Choose layouts, preferences, and themes that suit your style, so you feel at home."
+                index={4}
               />
             </div>
           </div>

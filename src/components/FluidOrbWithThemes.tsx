@@ -4,6 +4,31 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 
+// 1) Define some subtle color schemes that won't clash
+//    Each scheme has a darker "base" + a lighter "highlight".
+const COLOR_SCHEMES = [
+  // Theme #0: Blue (original)
+  {
+    base: [0.02, 0.1, 0.3],
+    highlight: [0.2, 0.7, 1.0],
+  },
+  // Theme #1: Teal + Soft Green
+  {
+    base: [0.0, 0.15, 0.15],
+    highlight: [0.15, 0.9, 0.6],
+  },
+  // Theme #2: Purple + Pink
+  {
+    base: [0.15, 0.0, 0.2],
+    highlight: [0.8, 0.3, 1.0],
+  },
+  // Theme #3: Soft Gray + Orange
+  {
+    base: [0.1, 0.1, 0.1],
+    highlight: [1.0, 0.6, 0.3],
+  },
+];
+
 // ---------------------------------------
 //       Vertex Shader (simple pass)
 // ---------------------------------------
@@ -16,10 +41,13 @@ const vertexShader = `
 `;
 
 // ---------------------------------------
-//  Fragment Shader (with "connections")
+//  Fragment Shader (Uses uBaseColor + uHighlightColor)
 // ---------------------------------------
 const fragmentShader = `
   uniform float uTime;
+  uniform vec3 uBaseColor;
+  uniform vec3 uHighlightColor;
+
   varying vec2 vUv;
 
   // -----------------------------
@@ -28,10 +56,12 @@ const fragmentShader = `
   float random(vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
   }
+
   float noise(vec2 st) {
     vec2 i = floor(st);
     vec2 f = fract(st);
     vec2 u = f*f*(3.0 - 2.0*f);
+
     return mix(
       mix( random(i + vec2(0.0, 0.0)), 
            random(i + vec2(1.0, 0.0)), 
@@ -42,6 +72,7 @@ const fragmentShader = `
       u.y
     );
   }
+
   float fbm(vec2 st) {
     float value = 0.0;
     float amp   = 0.5;
@@ -54,23 +85,12 @@ const fragmentShader = `
   }
 
   // ------------------------------------------------
-  //    Metaball (exp-based falloff)
+  //          Metaball (exp-based falloff)
   // ------------------------------------------------
   float metaball(vec2 p, vec2 center, float radius) {
     float d = length(p - center);
-    // If you want sharper highlights, increase 3.0 => 4.0 or 5.0
+    // If you want sharper highlights, increase from 3.0 => 4.0 or 5.0
     return exp(-3.0 * d / radius);
-  }
-
-  // ------------------------------------------------
-  //    Distance to a line segment (for connections)
-  // ------------------------------------------------
-  float lineDistance(vec2 p, vec2 a, vec2 b) {
-    vec2 ap = p - a;
-    vec2 ab = b - a;
-    float t = clamp(dot(ap, ab) / dot(ab, ab), 0.0, 1.0);
-    vec2 closest = a + t * ab;
-    return length(p - closest);
   }
 
   void main() {
@@ -93,46 +113,18 @@ const fragmentShader = `
     );
     strength += metaball(p, centerPos, 0.45 + 0.1 * abs(swirl));
 
-    // We'll store offset positions for orbiting blobs 
-    vec2 offsets[3];
-
     // -----------------------------
     // 2) Orbiting Lobes
     // -----------------------------
-    for (int i = 0; i < 3; i++) {
-      float angle = t + float(i) * 2.0944; // ~120 deg offset
-      float orbRadius = 0.3 + 0.1 * fbm(vec2(t + float(i)));
+    for (float i = 0.0; i < 3.0; i++) {
+      float angle = t + i * 2.0944; // ~120 deg offset
+      float orbRadius = 0.3 + 0.1 * fbm(vec2(t + i));
       vec2 offset = vec2(cos(angle), sin(angle)) * orbRadius;
       strength += metaball(p, offset, 0.25);
-      offsets[i] = offset;
     }
 
     // Subtle extra swirl
     strength += fbm(p * 3.0 - vec2(t * 0.2, t * 0.2)) * 0.2;
-
-    // --------------------------------
-    //  Draw "Connection" Lines
-    // --------------------------------
-    // Lines from center to each orbiting offset
-    float connectionAlpha = 0.0;
-    for(int i = 0; i < 3; i++) {
-      float distLine = lineDistance(p, centerPos, offsets[i]);
-      // If within ~0.03 of the line, we fade in
-      float lineGlow = 1.0 - smoothstep(0.015, 0.03, distLine);
-      // Accumulate
-      connectionAlpha = max(connectionAlpha, lineGlow);
-    }
-
-    // Optionally, lines between the orbiting offsets themselves:
-    /*
-    for(int i=0; i<3; i++){
-      for(int j=i+1; j<3; j++){
-        float distLine = lineDistance(p, offsets[i], offsets[j]);
-        float lineGlow = 1.0 - smoothstep(0.015, 0.03, distLine);
-        connectionAlpha = max(connectionAlpha, lineGlow);
-      }
-    }
-    */
 
     // -----------------------------
     //   Color & Glow
@@ -140,21 +132,17 @@ const fragmentShader = `
     // Gentle glow
     float glow = exp(-2.0 * strength) * 0.4;
 
-    // Darker base color => more contrast
-    vec3 baseColor = vec3(0.02, 0.1, 0.3);
-    // Brighter highlight color
-    vec3 highlight = vec3(0.2, 0.7, 1.0);
+    // Use uniforms for color instead of hard-coded
+    vec3 baseColor = uBaseColor;         // e.g. (0.02, 0.1, 0.3)
+    vec3 highlightColor = uHighlightColor; // e.g. (0.2, 0.7, 1.0)
 
     // Blend colors based on strength + swirl
     float mixFactor = clamp(strength * 0.7 + swirl * 0.3, 0.0, 1.0);
-    vec3 color = mix(baseColor, highlight, mixFactor);
+    vec3 color = mix(baseColor, highlightColor, mixFactor);
 
     // Add a lighter glow overlay
-    color += vec3(0.3, 0.75, 1.0) * glow;
-
-    // Add "connection" lines in a subtle color
-    vec3 connectionColor = vec3(0.5, 0.9, 1.0);
-    color += connectionColor * connectionAlpha * 0.4;
+    // We'll just saturate highlightColor a bit more
+    color += highlightColor * glow * 0.5;
 
     // -----------------------------
     //  Soft radial fade + discard
@@ -171,7 +159,13 @@ const fragmentShader = `
   }
 `;
 
-const FluidOrbBlue: React.FC = () => {
+type FluidOrbWithThemesProps = {
+  themeIndex?: number; // 0..3
+};
+
+const FluidOrbWithThemes: React.FC<FluidOrbWithThemesProps> = ({
+  themeIndex = 0,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -212,6 +206,9 @@ const FluidOrbBlue: React.FC = () => {
     );
     composer.addPass(bloomPass);
 
+    // Grab chosen color scheme
+    const scheme = COLOR_SCHEMES[themeIndex] || COLOR_SCHEMES[0];
+
     // Shader Material
     const material = new THREE.ShaderMaterial({
       vertexShader,
@@ -221,6 +218,8 @@ const FluidOrbBlue: React.FC = () => {
       side: THREE.DoubleSide,
       uniforms: {
         uTime: { value: 0 },
+        uBaseColor: { value: new THREE.Color(...scheme.base) },
+        uHighlightColor: { value: new THREE.Color(...scheme.highlight) },
       },
     });
 
@@ -258,7 +257,7 @@ const FluidOrbBlue: React.FC = () => {
       material.dispose();
       composer.dispose();
     };
-  }, []);
+  }, [themeIndex]);
 
   return (
     <div
@@ -279,4 +278,4 @@ const FluidOrbBlue: React.FC = () => {
   );
 };
 
-export default FluidOrbBlue;
+export default FluidOrbWithThemes;

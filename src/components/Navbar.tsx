@@ -8,6 +8,7 @@ import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const { submitEmail, isLoading, error, success } = useWaitlistSubmission();
 
@@ -23,16 +24,16 @@ const Navbar: React.FC = () => {
   const scrollToBenefits = () => {
     const benefitsSection = document.querySelector(".benefits-section");
     benefitsSection?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await submitEmail(email);
     if (!error) {
-      // Close modal after successful submission with a small delay
       setTimeout(() => {
         setShowEmailInput(false);
-        setEmail(""); // Reset email input
+        setEmail("");
       }, 1500);
     }
   };
@@ -44,7 +45,7 @@ const Navbar: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          isScrolled || isMenuOpen
             ? "bg-black/50 backdrop-blur-md border-b border-gray-800/50"
             : "bg-transparent"
         }`}
@@ -53,26 +54,51 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo and Name */}
             <div className="flex items-center">
-              <div className="flex items-center justify-center w-15 h-12">
+              <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
                 <img
                   src={Logo}
                   alt="Knowledge Vault Logo"
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-white text-lg font-medium">
+              <span className="text-white text-base sm:text-lg font-medium ml-2 sm:ml-3">
                 Knowledge Vault
               </span>
             </div>
 
-            {/* Navigation Links */}
-            <div className="flex items-center space-x-8">
+            {/* Mobile menu button */}
+            <div className="md:hidden">
               <button
-                onClick={scrollToBenefits}
-                className="text-gray-300 hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-400 hover:text-white p-2"
               >
-                Benefits
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
               </button>
+            </div>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center space-x-8">
               <button
                 onClick={() => setShowEmailInput(true)}
                 className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors"
@@ -81,6 +107,36 @@ const Navbar: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden border-t border-gray-800/50 py-4"
+              >
+                <div className="flex flex-col space-y-4">
+                  <button
+                    onClick={scrollToBenefits}
+                    className="text-gray-300 hover:text-white transition-colors py-2"
+                  >
+                    Benefits
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowEmailInput(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors"
+                  >
+                    Join Waitlist
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
 
@@ -91,7 +147,7 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setShowEmailInput(false)}
           >
             <motion.div
@@ -101,9 +157,29 @@ const Navbar: React.FC = () => {
               className="bg-gray-900 p-6 rounded-xl border border-gray-800 max-w-md w-full mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-xl font-bold text-white mb-4">
-                Join the Waitlist
-              </h3>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-white">
+                  Join the Waitlist
+                </h3>
+                <button
+                  onClick={() => setShowEmailInput(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
               <form onSubmit={handleSubmit} className="relative">
                 <div className="relative">
                   <input
