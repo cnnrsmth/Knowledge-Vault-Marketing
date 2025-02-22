@@ -13,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
 import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
-import BrainImage from "../assets/Brain.png";
 import FluidOrbWithThemes from "./FluidOrbWithThemes";
 import { useInView } from "react-intersection-observer";
 
@@ -299,7 +298,7 @@ const ScrollIndicator = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 1, duration: 0.8 }}
-    className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+    className="absolute bottom-12 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity mt-12 sm:mt-0"
     onClick={() => {
       window.scrollTo({
         top: window.innerHeight,
@@ -634,7 +633,7 @@ const Landing: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="flex flex-col items-center px-2 sm:px-0"
+              className="flex flex-col items-center px-2 sm:px-0 mb-16 sm:mb-0"
             >
               <span className="text-sm pb-6 sm:pb-8 text-gray-500">
                 Be the first to know when we launch

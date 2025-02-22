@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo.png"; // Adjust path based on location
 import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 
@@ -118,12 +118,6 @@ const Navbar: React.FC = () => {
                 className="md:hidden border-t border-gray-800/50 py-4"
               >
                 <div className="flex flex-col space-y-4">
-                  <button
-                    onClick={scrollToBenefits}
-                    className="text-gray-300 hover:text-white transition-colors py-2"
-                  >
-                    Benefits
-                  </button>
                   <button
                     onClick={() => {
                       setShowEmailInput(true);
