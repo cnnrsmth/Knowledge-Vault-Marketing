@@ -494,7 +494,7 @@ const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className={`px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed ${
+          className={`px-6 py-3 text-white bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg font-medium transition-colors whitespace-nowrap backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed ${
             isLoading ? "animate-pulse" : ""
           }`}
         >
@@ -566,7 +566,7 @@ const Landing: React.FC = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-gray-400 text-lg flex flex-col items-center benefits-section px-2 sm:px-0"
             >
-              <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mb-8">
+              <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mt-2 mb-8">
                 Key Benefits
               </span>
 
