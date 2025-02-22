@@ -14,6 +14,7 @@ import {
 import Navbar from "./Navbar";
 import { useWaitlistSubmission } from "../hooks/useWaitlistSubmission";
 import BrainImage from "../assets/Brain.png";
+import FluidOrbBlue from "./FluidOrbBlue";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -195,6 +196,101 @@ const additionalAnimations = `
       filter: blur(10px);
       pointer-events: none;
     }
+
+    @keyframes wave-motion {
+      0% {
+        transform: translateX(-8%) translateY(3%) rotate(-3deg) scale(0.95);
+      }
+      33% {
+        transform: translateX(4%) translateY(-4%) rotate(2deg) scale(1);
+      }
+      66% {
+        transform: translateX(-2%) translateY(5%) rotate(-1deg) scale(0.98);
+      }
+      100% {
+        transform: translateX(-8%) translateY(3%) rotate(-3deg) scale(0.95);
+      }
+    }
+
+    @keyframes wave-motion-alt {
+      0% {
+        transform: translateX(8%) translateY(-3%) rotate(3deg) scale(0.98);
+      }
+      33% {
+        transform: translateX(-4%) translateY(4%) rotate(-2deg) scale(1);
+      }
+      66% {
+        transform: translateX(2%) translateY(-5%) rotate(1deg) scale(0.95);
+      }
+      100% {
+        transform: translateX(8%) translateY(-3%) rotate(3deg) scale(0.98);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 0.8;
+        filter: brightness(0.8);
+      }
+      50% {
+        opacity: 0.9;
+        filter: brightness(0.9);
+      }
+    }
+
+    .orb-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .glowing-orb {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, 
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.6) 30%,
+        rgba(255, 255, 255, 0.4) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      box-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.2),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+    }
+
+    .blob {
+      position: absolute;
+      inset: 10px;
+      filter: blur(10px);
+      mix-blend-mode: overlay;
+      animation: morph-blob 12s ease-in-out infinite;
+      opacity: 0.8;
+      transform-origin: center;
+    }
+
+    .blob-1 {
+      background: linear-gradient(120deg, #60a5fa 0%, #3b82f6 100%);
+      animation-delay: -3s;
+    }
+
+    .blob-2 {
+      background: linear-gradient(-120deg, #2563eb 0%, #1d4ed8 100%);
+      animation-delay: -6s;
+      opacity: 0.7;
+    }
+
+    .blob-3 {
+      background: linear-gradient(60deg, #93c5fd 0%, #60a5fa 100%);
+      animation-delay: -9s;
+      opacity: 0.6;
+    }
 `;
 
 const ScrollIndicator = () => (
@@ -243,6 +339,8 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
   isReversed,
   isFirstSection,
 }) => {
+  const isAskVault = title.includes("Ask Your Vault");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -257,7 +355,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
         <div className="group mb-6">
           <div className="relative">
             {/* Subtle Glow Background */}
-            <div className="absolute inset-0 bg-blue-500/5 blur-xl rounded-full group-hover:bg-blue-500/10 transition-all duration-300" />
+            <div className="absolute inset-0 transition-all duration-300" />
             {/* Icon Container */}
             <div className="relative h-16 w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
               <FontAwesomeIcon
@@ -272,7 +370,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
         </h2>
         <p className="text-gray-400 text-lg leading-relaxed">{description}</p>
       </div>
-      <div className="flex-1 relative">
+      <div className="flex-1 relative flex items-center justify-center">
         {isFirstSection ? (
           <>
             {/* Background Pattern Container */}
@@ -293,8 +391,6 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
                 <div className="brain-glow" />
                 <div className="expanding-circle"></div>
                 <div className="expanding-circle"></div>
-
-                {/* Brain Image */}
                 <img
                   src={BrainImage}
                   alt="AI Brain"
@@ -303,6 +399,10 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
               </div>
             </div>
           </>
+        ) : isAskVault ? (
+          <div className="flex items-center justify-center">
+            <FluidOrbBlue />
+          </div>
         ) : (
           <div className="bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm border border-gray-700/50 transform transition-all hover:scale-105 hover:border-blue-500/50">
             <div className="aspect-video bg-gray-900/50 rounded-lg"></div>
@@ -385,7 +485,7 @@ const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
 
 const Landing: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+    <div className="min-h-screen bg-black text-gray-400 overflow-x-hidden relative">
       {/* Network Pattern Overlay - Moved before Navbar */}
       <div className="network-grid" />
 
@@ -431,8 +531,8 @@ const Landing: React.FC = () => {
                 One Vault to Rule Them All
               </h1>
               <p className="text-xl md:text-2xl text-gray-400">
-                Effortlessly connect insights across your all the books you've
-                read. Summarise Your Books, Ask Them Questions, Unlock Insights.
+                Summarise your books, ask them questions, and effortlessly
+                connect ideas to unlock new insights.
               </p>
             </motion.div>
 
@@ -525,16 +625,14 @@ const Landing: React.FC = () => {
           <ScrollIndicator />
         </div>
 
-        {/* Feature Sections with subtle gradient backgrounds */}
+        {/* Feature Sections */}
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-black to-gray-900 pointer-events-none" />
+          {/* Replace gradient with solid dark background */}
+          <div className="absolute inset-0 bg-black pointer-events-none" />
 
           <div className="relative">
             {/* Feature sections remain the same but with added visual separators */}
-            <div
-              id="instant-summaries"
-              className="border-t border-gray-800/50 backdrop-blur-sm"
-            >
+            <div id="instant-summaries" className="border-t border-gray-800/50">
               <FeatureSection
                 icon={faWandMagicSparkles}
                 title="AI Book Summaries: Your Content, Captured Instantly"
