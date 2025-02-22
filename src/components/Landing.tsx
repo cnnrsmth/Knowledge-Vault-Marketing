@@ -566,7 +566,7 @@ const Landing: React.FC = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-gray-400 text-lg flex flex-col items-center benefits-section px-2 sm:px-0"
             >
-              <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mt-2 mb-8">
+              <span className="text-sm uppercase tracking-wider font-medium text-blue-400/80 mt-8 mb-8">
                 Key Benefits
               </span>
 
