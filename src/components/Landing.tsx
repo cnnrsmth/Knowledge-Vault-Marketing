@@ -33,7 +33,7 @@ const glowingBorderKeyframes = `
       opacity: 0;
     }
     90% {
-      left: calc(100% - 100px);
+      left: 100%;
       opacity: 0;
     }
   }
@@ -448,7 +448,7 @@ const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
         <div className="relative flex-1">
           {/* Glowing border beam effect */}
           <div
-            className="absolute h-[2px] w-[200px] top-0 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 overflow-hidden"
+            className="absolute h-[2px] w-[30%] top-0 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 overflow-hidden"
             style={{
               animation: "borderBeam 8s ease-in-out infinite",
             }}
