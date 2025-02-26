@@ -568,7 +568,7 @@ const Landing: React.FC = () => {
               </span>
 
               {/* Book Features Icons */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row justify-center gap-6 sm:gap-8 md:gap-16 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row justify-start sm:justify-center gap-6 mb-8">
                 {[
                   {
                     icon: faWandMagicSparkles,
@@ -601,7 +601,7 @@ const Landing: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 + index * 0.1 }}
-                    className="group flex flex-col items-center gap-3 cursor-pointer"
+                    className="group flex flex-row sm:flex-col items-center sm:items-center gap-4 cursor-pointer"
                     onClick={() => {
                       document
                         .getElementById(item.sectionId)
@@ -610,14 +610,14 @@ const Landing: React.FC = () => {
                   >
                     <div className="relative">
                       <div className="absolute inset-0 bg-blue-500/5 blur-xl rounded-full group-hover:bg-blue-500/10 transition-all duration-300" />
-                      <div className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
+                      <div className="relative h-14 w-14 sm:h-14 sm:w-14 md:h-16 md:w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300">
                         <FontAwesomeIcon
                           icon={item.icon}
                           className="text-2xl sm:text-3xl text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
                         />
                       </div>
                     </div>
-                    <span className="text-xs sm:text-sm font-medium text-gray-400/90 group-hover:text-white transition-colors duration-300 text-center">
+                    <span className="text-sm font-medium text-gray-400/90 group-hover:text-white transition-colors duration-300 text-left sm:text-center">
                       {item.label}
                     </span>
                   </motion.div>
