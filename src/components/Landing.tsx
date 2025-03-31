@@ -615,14 +615,14 @@ const TestimonialCarousel: React.FC = () => {
     {
       name: "Samantha Meyer",
       role: "Busy Mum",
-      text: "I love quotes. Knowledge Vault helps me find the quotes I need quickly and easily.",
+      text: "Everything I need in a book app. Please expand beyond books!",
       image: SamMeyerImage,
       stars: 5,
     },
     {
       name: "Joseph Kim",
       role: "Digital Nomad",
-      text: "Cool app. It's much nicer to spend your time learning new knowledge, rather than spending hours browsing social media.",
+      text: "Cool app. It's much nicer to spend your time learning new knowledge, rather than spending hours doom scrolling.",
       image: JosephKimImage,
       stars: 5,
     },
