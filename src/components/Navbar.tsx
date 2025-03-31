@@ -100,10 +100,12 @@ const Navbar: React.FC = () => {
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-8">
               <button
-                onClick={() => setShowEmailInput(true)}
+                onClick={() =>
+                  window.open("https://www.tryknowledgevault.xyz", "_blank")
+                }
                 className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors"
               >
-                Join Waitlist
+                Sign Up Now
               </button>
             </div>
           </div>
@@ -120,12 +122,15 @@ const Navbar: React.FC = () => {
                 <div className="flex flex-col space-y-4">
                   <button
                     onClick={() => {
-                      setShowEmailInput(true);
+                      window.open(
+                        "https://www.tryknowledgevault.xyz",
+                        "_blank"
+                      );
                       setIsMenuOpen(false);
                     }}
                     className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors"
                   >
-                    Join Waitlist
+                    Sign Up Now
                   </button>
                 </div>
               </motion.div>
@@ -153,7 +158,7 @@ const Navbar: React.FC = () => {
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
-                  Join the Waitlist
+                  Join Our Platform
                 </h3>
                 <button
                   onClick={() => setShowEmailInput(false)}
