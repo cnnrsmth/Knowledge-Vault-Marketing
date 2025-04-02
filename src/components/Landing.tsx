@@ -19,6 +19,9 @@ import HeroImage from "../assets/generic-marketing-digital-nomad.png";
 import MikeImage from "../assets/mike.png";
 import JosephKimImage from "../assets/joseph-kim.png";
 import SamMeyerImage from "../assets/sam-meyer.png";
+import AllBooksGif from "../assets/all-your-books-in-one-place.gif";
+import InstantlyFindGif from "../assets/instantly-find-what-matters.gif";
+import InstantBookSummariesGif from "../assets/inatant-book-summaries.gif";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -490,41 +493,27 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
           {/* Video Overlay for style */}
           <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent z-10 pointer-events-none group-hover:from-blue-900/40 transition-all duration-300"></div>
 
-          {/* Decorative Elements */}
-          <div className="absolute top-3 left-3 flex gap-1.5 z-20 pointer-events-none">
-            <div className="w-3 h-3 rounded-full bg-red-500/90"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/90"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/90"></div>
-          </div>
-
-          {/* Video Element */}
+          {/* Video Element or GIF based on index */}
           <div className="relative rounded-xl overflow-hidden border border-gray-700/60 group-hover:border-blue-500/30 transition-all duration-300">
-            <div
-              style={{
-                position: "relative",
-                paddingBottom: "56.69291338582677%",
-                height: 0,
-              }}
-            >
-              <iframe
-                src={
-                  index === 0
-                    ? "https://www.loom.com/embed/790ee971c6d94a5ebe1c08577e92ad3a?sid=83b487fc-d7bb-4953-9e51-8c4f015aa731"
-                    : index === 1
-                    ? "https://www.loom.com/embed/c9cf500365f94e60936c03d45ade8c67?sid=9b2cdb74-7310-4f28-9004-ad2e4fc1d673"
-                    : "https://www.loom.com/embed/9659718219644fedaf5ed3e3ba3411cf?sid=abd57314-25be-47e6-bc2e-241d4be8cfed"
-                }
-                frameBorder="0"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              ></iframe>
-            </div>
+            {index === 0 ? (
+              <img
+                src={InstantBookSummariesGif}
+                alt="Instant book summaries that save you time"
+                className="w-full h-auto"
+              />
+            ) : index === 1 ? (
+              <img
+                src={AllBooksGif}
+                alt="All your book summaries in one place"
+                className="w-full h-auto"
+              />
+            ) : index === 2 ? (
+              <img
+                src={InstantlyFindGif}
+                alt="Instantly find what matters"
+                className="w-full h-auto"
+              />
+            ) : null}
           </div>
         </div>
       </motion.div>
@@ -607,22 +596,22 @@ const TestimonialCarousel: React.FC = () => {
   const testimonials = [
     {
       name: "Mike Albertson",
-      role: "Non-Fiction Reader",
-      text: "I've decided to unsubscribe from Blinkist. This is has everything I need without overcomplicating things",
+      role: "Leaders",
+      text: "Most CEOs read a book a week. Many use programs like this to acquire key concepts that help them keep a fresh perspective helping hone vision, strategy and action.",
       image: MikeImage,
       stars: 5,
     },
     {
       name: "Samantha Meyer",
-      role: "Busy Mum",
-      text: "Everything I need in a book app. Please expand beyond books!",
+      role: "Upskillers",
+      text: "Life changing. The concept of being able to grasp a book's main point in such a short time truly opens multiple opportunities to grow every area of your life at a faster rate.",
       image: SamMeyerImage,
       stars: 5,
     },
     {
       name: "Joseph Kim",
-      role: "Digital Nomad",
-      text: "Cool app. It's much nicer to spend your time learning new knowledge, rather than spending hours doom scrolling.",
+      role: "Lifelong learners",
+      text: "This is simply the coolest app that exists. Deserved full credit. It's much nicer to spend your time learning new knowledge, rather than spending hours browsing social media.",
       image: JosephKimImage,
       stars: 5,
     },
@@ -899,7 +888,9 @@ const Landing: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
                 className="absolute -bottom-5 -left-5 bg-blue-600/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-500/30 text-white text-sm font-medium"
-              ></motion.div>
+              >
+                AI-Powered Summaries
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -907,7 +898,7 @@ const Landing: React.FC = () => {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="absolute -top-5 -right-5 bg-purple-600/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-purple-500/30 text-white text-sm font-medium"
               >
-                AI-Powered Summaries
+                Personal Knowledge Vault
               </motion.div>
             </motion.div>
           </motion.div>
