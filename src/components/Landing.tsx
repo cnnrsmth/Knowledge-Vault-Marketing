@@ -591,203 +591,133 @@ const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
   );
 };
 
-// Testimonial Carousel Component
-const TestimonialCarousel: React.FC = () => {
+// Twitter/X Style Testimonials Component
+const TwitterTestimonials: React.FC = () => {
   const testimonials = [
     {
-      name: "Mike Albertson",
-      role: "Leaders",
-      text: "Most CEOs read a book a week. Many use programs like this to acquire key concepts that help them keep a fresh perspective helping hone vision, strategy and action.",
-      image: MikeImage,
-      stars: 5,
+      name: "Brendan O'Leary",
+      handle: "@olearycrew",
+      text: "I forget EVERYTHING i read but @knowledge_vault got me locked in. key stuff sticks now and i can pull it up like snap. brain hack fr. 🧠",
+      placeholder: "https://via.placeholder.com/60",
     },
     {
-      name: "Samantha Meyer",
-      role: "Upskillers",
-      text: "Life changing. The concept of being able to grasp a book's main point in such a short time truly opens multiple opportunities to grow every area of your life at a faster rate.",
-      image: SamMeyerImage,
-      stars: 5,
+      name: "Sveta Bay",
+      handle: "@sveta_bay",
+      text: "books used to be read it, done, bye. now @knowledge_vault’s got me stacking insights like a boss. my brain’s legit getting an upgrade.",
+      placeholder: "https://via.placeholder.com/60",
     },
     {
-      name: "Joseph Kim",
-      role: "Lifelong learners",
-      text: "This is simply the coolest app that exists. Deserved full credit. It's much nicer to spend your time learning new knowledge, rather than spending hours browsing social media.",
-      image: JosephKimImage,
-      stars: 5,
+      name: "Jacky W",
+      handle: "@jkhwongie",
+      text: "Been on @knowledge_vault for months and im HOOKED. u read, u keep the good shit, u don’t forget. sleep on this app and u lose.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Abhishek V",
+      handle: "@abvijayvergiya",
+      text: "Used to doomscroll all day, swapped it for @knowledge_vault. Now i’m leveling up daily. no cap, this app’s a W.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Gino",
+      handle: "@Devmesis",
+      text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is that cheat code i didn’t even know i was missing.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Sukh",
+      handle: "@thisissukh_",
+      text: "Bought @knowledge_vault day one. Them AI summaries? Sexy af and my brain loves it. 💫",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Stephan Meijer",
+      handle: "@meijer_s",
+      text: "All my fave quotes, searchable in like 2 secs. @knowledge_vault took my messy highlights and made em gold.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Zulal • Designer",
+      handle: "@zee7",
+      text: "I suck at summaries but @knowledge_vault does it for me. edits are quick, keeps me sharp, no burnout. clutch af.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Miguel Rengifo",
+      handle: "@miguelreng",
+      text: "No time to read full books? Me neither. @knowledge_vault summarizes it, i vibe w it, then i go deeper. workflow’s never been this clean.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Rachel Kim",
+      handle: "@rachelreads",
+      text: "Ok @knowledge_vault is wild,, linked up ideas across books i love. my fave authors been saying the same shit this whole time. mind blown. 🤯",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Adarsh Sharma",
+      handle: "@ad0rsh",
+      text: "100 books deep w @knowledge_vault and it’s still fire. Worth every penny.",
+      placeholder: "https://via.placeholder.com/60",
+    },
+    {
+      name: "Helen Bailey",
+      handle: "@helenbailey",
+      text: "@knowledge_vault got me reading MORE. I skim summaries, find the bangers, then dive in. Obsessed w this thing.",
+      placeholder: "https://via.placeholder.com/60",
     },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  // Render star ratings
-  const renderStars = (count: number) => {
-    return Array(count)
-      .fill(0)
-      .map((_, i) => (
-        <svg
-          key={i}
-          className="w-5 h-5 text-yellow-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-        </svg>
-      ));
-  };
-
   return (
-    <div className="relative w-full overflow-hidden py-16">
+    <div className="py-16 px-4 sm:px-6 md:px-8 bg-black relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-600/5 rounded-full filter blur-[100px]"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-600/5 rounded-full filter blur-[100px]"></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-600/5 rounded-full filter blur-[100px] opacity-60"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-600/5 rounded-full filter blur-[100px] opacity-60"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
-            What Our Users Are Saying
+            What People Are Saying
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-3 rounded-full"></div>
         </div>
 
-        <div className="relative">
-          {/* Testimonial Cards */}
-          <div className="relative min-h-[400px]">
-            <AnimatePresence mode="wait">
-              {testimonials.map(
-                (testimonial, index) =>
-                  index === activeIndex && (
-                    <motion.div
-                      key={testimonial.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                      className="w-full"
-                    >
-                      <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
-                        {/* Image Column */}
-                        <div className="w-full lg:w-1/3 flex flex-col items-center">
-                          <div className="relative mb-4">
-                            <span className="absolute -top-3 -left-3 bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-lg z-10">
-                              {testimonial.role}
-                            </span>
-                            <div className="w-48 h-48 md:w-64 md:h-64 rounded-lg overflow-hidden border-2 border-gray-200 shadow-xl">
-                              <img
-                                src={testimonial.image}
-                                alt={testimonial.name}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Content Column */}
-                        <div className="w-full lg:w-2/3">
-                          <div className="flex mb-4">
-                            {renderStars(testimonial.stars)}
-                          </div>
-
-                          <div className="relative">
-                            {/* Large quote mark */}
-                            <div className="absolute -top-10 -left-6 text-blue-200/20 pointer-events-none">
-                              <svg
-                                width="60"
-                                height="60"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                              >
-                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                              </svg>
-                            </div>
-                            <p className="text-gray-200 text-lg md:text-xl font-medium mb-6 pl-3 leading-relaxed">
-                              {testimonial.text}
-                            </p>
-                          </div>
-
-                          <div className="mt-4">
-                            <p className="font-medium text-white text-lg">
-                              {testimonial.name}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation Dots */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeIndex === index
-                    ? "bg-blue-500 w-8"
-                    : "bg-gray-600 hover:bg-gray-500"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Navigation Arrows */}
-          <div className="hidden md:block">
-            <button
-              onClick={() =>
-                setActiveIndex(
-                  (activeIndex - 1 + testimonials.length) % testimonials.length
-                )
-              }
-              className="absolute top-1/2 -left-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-gray-800/70 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all"
-              aria-label="Previous testimonial"
+        {/* Pinterest-style masonry layout for testimonials */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.handle}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-800/70 
+                transition-all duration-200 shadow-xl break-inside-avoid mb-4
+                hover:bg-gray-800/70 hover:border-gray-700/70"
+              style={{ height: "fit-content" }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() =>
-                setActiveIndex((activeIndex + 1) % testimonials.length)
-              }
-              className="absolute top-1/2 -right-4 transform -translate-y-1/2 w-12 h-12 rounded-full bg-gray-800/70 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all"
-              aria-label="Next testimonial"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
+              <div className="flex items-center mb-3">
+                <div className="h-10 w-10 rounded-full overflow-hidden flex-shrink-0 bg-gray-800 border border-gray-700">
+                  <img
+                    src={testimonial.placeholder}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="ml-3">
+                  <p className="font-medium text-white text-sm">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-gray-500 text-xs">{testimonial.handle}</p>
+                </div>
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                {testimonial.text}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
@@ -972,7 +902,7 @@ const Landing: React.FC = () => {
 
         {/* Testimonial Section */}
         <div className="border-t border-gray-800/50 bg-black relative overflow-hidden">
-          <TestimonialCarousel />
+          <TwitterTestimonials />
         </div>
 
         {/* Final CTA Section with enhanced visibility */}
