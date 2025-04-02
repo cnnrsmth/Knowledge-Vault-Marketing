@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
                 }
                 className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors"
               >
-                Sign Up Now
+                Try It, Free
               </button>
             </div>
           </div>

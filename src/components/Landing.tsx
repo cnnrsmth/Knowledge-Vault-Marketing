@@ -584,7 +584,7 @@ const EmailInput: React.FC<{ className?: string }> = ({ className = "" }) => {
             isLoading ? "animate-pulse" : ""
           }`}
         >
-          {isLoading ? "Processing..." : "Sign Up Now"}
+          {isLoading ? "Processing..." : "Try It, Free"}
         </button>
       </div>
     </form>
@@ -791,7 +791,7 @@ const Landing: React.FC = () => {
                   }
                   className="px-6 py-3 bg-transparent border border-gray-700 hover:border-blue-500/50 rounded-lg text-white transition-colors text-lg font-medium hover:bg-gray-800/30"
                 >
-                  Sign Up Now
+                  Try It, Free
                 </button>
               </div>
             </motion.div>
@@ -932,7 +932,7 @@ const Landing: React.FC = () => {
                 }
                 className="px-8 py-4 bg-blue-600 text-white text-lg md:text-xl font-bold rounded-lg shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all duration-300 transform hover:translate-y-[-2px]"
               >
-                Sign Up, I Dare You
+                Ready to level up?
               </motion.button>
             </motion.div>
           </div>
