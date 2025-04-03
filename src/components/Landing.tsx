@@ -815,15 +815,6 @@ const Landing: React.FC = () => {
               >
                 AI-Powered Summaries
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                className="absolute -top-5 -right-5 bg-purple-600/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-purple-500/30 text-white text-sm font-medium"
-              >
-                Personal Knowledge Vault
-              </motion.div>
             </motion.div>
           </motion.div>
 
