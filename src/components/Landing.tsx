@@ -22,6 +22,17 @@ import SamMeyerImage from "../assets/sam-meyer.png";
 import AllBooksGif from "../assets/all-your-books-in-one-place.gif";
 import InstantlyFindGif from "../assets/instantly-find-what-matters.gif";
 import InstantBookSummariesGif from "../assets/inatant-book-summaries.gif";
+import BrendanImage from "../assets/brendan.jpeg";
+import JackyImage from "../assets/jacky.png";
+import AbhishekImage from "../assets/abhishek.jpeg";
+import GinoImage from "../assets/gino.jpeg";
+import SukhImage from "../assets/sukh.jpeg";
+import StephanImage from "../assets/stephan.jpeg";
+import ZulalImage from "../assets/Zulal.jpeg";
+import MiguelImage from "../assets/miguel.png";
+import RachelImage from "../assets/rachel.jpeg";
+import AdarshImage from "../assets/adarsh.jpeg";
+import HelenImage from "../assets/helen.jpeg";
 
 // Update the keyframe animation
 const glowingBorderKeyframes = `
@@ -327,36 +338,7 @@ const additionalAnimations = `
     }
 `;
 
-const ScrollIndicator = () => (
-  <motion.button
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1, duration: 0.8 }}
-    className="absolute bottom-12 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity mt-12 sm:mt-0"
-    onClick={() => {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: "smooth",
-      });
-    }}
-  >
-    <span className="text-gray-400 text-sm font-medium">
-      Click to learn more
-    </span>
-    <motion.div
-      animate={{
-        y: [0, 5, 0],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
-      <FontAwesomeIcon icon={faChevronDown} className="text-gray-400 text-xl" />
-    </motion.div>
-  </motion.button>
-);
+const ScrollIndicator = () => <></>;
 
 interface FeatureSectionProps {
   icon: any;
@@ -597,68 +579,68 @@ const TwitterTestimonials: React.FC = () => {
     {
       name: "Brendan O'Leary",
       handle: "@olearycrew",
-      text: "I forget EVERYTHING I read but with @knowledge_vault key stuff sticks now. Brain hack. 🧠",
-      placeholder: "https://via.placeholder.com/60",
+      text: "I don't retain much from books. Having it stored in a place where i can quickly revisit key concepts is a game changer.\n\nNow I actually remember what I read! 🧠",
+      image: BrendanImage,
     },
     {
       name: "Jacky W",
       handle: "@jkhwongie",
       text: "Been on @knowledge_vault for months and im HOOKED. Don't sleep on this app.",
-      placeholder: "https://via.placeholder.com/60",
+      image: JackyImage,
     },
     {
       name: "Abhishek V",
       handle: "@abvijayvergiya",
       text: "Used to doomscroll, swapped it for @knowledge_vault.",
-      placeholder: "https://via.placeholder.com/60",
+      image: AbhishekImage,
     },
     {
       name: "Gino",
       handle: "@Devmesis",
       text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is a cheat code.",
-      placeholder: "https://via.placeholder.com/60",
+      image: GinoImage,
     },
     {
       name: "Sukh",
       handle: "@thisissukh_",
-      text: "Bought @knowledge_vault day one, haven't left since. 💫",
-      placeholder: "https://via.placeholder.com/60",
+      text: "Bought @knowledge_vault a month ago, haven't left since. 💫",
+      image: SukhImage,
     },
     {
       name: "Stephan Meijer",
       handle: "@meijer_s",
       text: "All my fave quotes, searchable in like 2 secs. @knowledge_vault.",
-      placeholder: "https://via.placeholder.com/60",
+      image: StephanImage,
     },
     {
       name: "Zulal",
       handle: "@zee7",
       text: "I don't have time to summarise what I read, but @knowledge_vault does it for me. Edits are quick, and it keeps me sharp.",
-      placeholder: "https://via.placeholder.com/60",
+      image: ZulalImage,
     },
     {
       name: "Miguel Rengifo",
       handle: "@miguelreng",
       text: "No time to read full books? Me neither. @knowledge_vault.",
-      placeholder: "https://via.placeholder.com/60",
+      image: MiguelImage,
     },
     {
       name: "Rachel Kim",
       handle: "@rachelreads",
-      text: "Ok @knowledge_vault is wild,, linked up ideas across books I love.🤯",
-      placeholder: "https://via.placeholder.com/60",
+      text: "Ok @knowledge_vault has replaced Blinkist.🤯",
+      image: RachelImage,
     },
     {
       name: "Adarsh Sharma",
       handle: "@ad0rsh",
-      text: "100 books deep w @knowledge_vault and it’s still fire. Worth every penny.",
-      placeholder: "https://via.placeholder.com/60",
+      text: "1 book a week w @knowledge_vault and it's still fire. Worth every penny.",
+      image: AdarshImage,
     },
     {
       name: "Helen Bailey",
       handle: "@helenbailey",
-      text: "@knowledge_vault got me reading MORE. I skim summaries, find the bangers, then dive in. Obsessed w this thing.",
-      placeholder: "https://via.placeholder.com/60",
+      text: "@knowledge_vault I skim summaries, find the bangers, then dive in. Obsessed w this thing.",
+      image: HelenImage,
     },
   ];
 
@@ -695,7 +677,7 @@ const TwitterTestimonials: React.FC = () => {
               <div className="flex items-center mb-3">
                 <div className="h-10 w-10 rounded-full overflow-hidden flex-shrink-0 bg-gray-800 border border-gray-700">
                   <img
-                    src={testimonial.placeholder}
+                    src={testimonial.image}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
                   />
