@@ -175,6 +175,18 @@ const additionalAnimations = `
       }
     }
 
+    /* Prevent white overscroll */
+    html, body {
+      background-color: #000;
+      overscroll-behavior: none;
+    }
+    
+    /* Ensure the root element has black background */
+    #root {
+      background-color: #000;
+      min-height: 100vh;
+    }
+
     .brain-container {
       position: relative;
       display: flex;
@@ -360,7 +372,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
   const themeIndex = index % 2 === 0 ? 0 : 3;
   const [ref, isInView] = useInView({
     rootMargin: "-10% 0px -10% 0px",
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   return (
@@ -368,11 +380,18 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
       ref={ref}
       initial={{
         opacity: 0,
-        x: isReversed ? 100 : -100,
+        x: window.innerWidth > 640 ? (isReversed ? 100 : -100) : 0,
       }}
       animate={{
         opacity: isInView ? 1 : 0,
-        x: isInView ? 0 : isReversed ? 100 : -100,
+        x:
+          window.innerWidth > 640
+            ? isInView
+              ? 0
+              : isReversed
+              ? 100
+              : -100
+            : 0,
       }}
       transition={{
         duration: 0.8,
@@ -380,14 +399,24 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
       }}
       className={`flex flex-col ${
         isReversed ? "md:flex-row-reverse" : "md:flex-row"
-      } gap-12 items-center max-w-6xl mx-auto px-4 py-20`}
+      } gap-6 sm:gap-12 items-center max-w-6xl mx-auto px-4 py-10 sm:py-20`}
     >
       <motion.div
         className="flex-1"
-        initial={{ opacity: 0, x: isReversed ? 50 : -50 }}
+        initial={{
+          opacity: 0,
+          x: window.innerWidth > 640 ? (isReversed ? 50 : -50) : 0,
+        }}
         animate={{
           opacity: isInView ? 1 : 0,
-          x: isInView ? 0 : isReversed ? 50 : -50,
+          x:
+            window.innerWidth > 640
+              ? isInView
+                ? 0
+                : isReversed
+                ? 50
+                : -50
+              : 0,
         }}
         transition={{
           duration: 0.8,
@@ -395,38 +424,41 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
           ease: "easeInOut",
         }}
       >
-        <div className="group mb-6">
+        <div className="group mb-4 sm:mb-6">
           <div className="relative">
             <div className="absolute inset-0 transition-all duration-300" />
-            <div className="relative h-16 w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
-              <FontAwesomeIcon icon={icon} className="text-3xl text-gray-400" />
+            <div className="relative h-12 w-12 sm:h-16 sm:w-16 flex items-center justify-center bg-gray-800/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
+              <FontAwesomeIcon
+                icon={icon}
+                className="text-2xl sm:text-3xl text-gray-400"
+              />
             </div>
           </div>
         </div>
-        <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
           {title}
         </h2>
-        <p className="text-gray-400 text-lg leading-relaxed mb-6">
+        <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
           {description}
         </p>
 
         {/* New Feature Detail */}
-        <div className="flex flex-col gap-4 mt-6">
+        <div className="flex flex-col gap-3 sm:gap-4 mt-4 sm:mt-6">
           {[1, 2, 3].map((item) => (
             <motion.div
               key={item}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 10 }}
               transition={{ delay: 0.3 + item * 0.1, duration: 0.5 }}
-              className="flex items-start gap-3"
+              className="flex items-start gap-2 sm:gap-3"
             >
-              <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+              <div className="flex-shrink-0 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
                 <FontAwesomeIcon
                   icon={faCheck}
-                  className="text-xs text-blue-400"
+                  className="text-[10px] sm:text-xs text-blue-400"
                 />
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-400 text-sm sm:text-base">
                 {index === 0 &&
                   item === 1 &&
                   "Summarise any book in seconds with AI"}
@@ -458,11 +490,21 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
         </div>
       </motion.div>
       <motion.div
-        className="flex-1 relative flex items-center justify-center"
-        initial={{ opacity: 0, x: isReversed ? -50 : 50 }}
+        className="flex-1 relative flex items-center justify-center w-full md:w-auto mt-6 md:mt-0"
+        initial={{
+          opacity: 0,
+          x: window.innerWidth > 640 ? (isReversed ? -50 : 50) : 0,
+        }}
         animate={{
           opacity: isInView ? 1 : 0,
-          x: isInView ? 0 : isReversed ? -50 : 50,
+          x:
+            window.innerWidth > 640
+              ? isInView
+                ? 0
+                : isReversed
+                ? -50
+                : 50
+              : 0,
         }}
         transition={{
           duration: 0.8,
@@ -645,7 +687,7 @@ const TwitterTestimonials: React.FC = () => {
   ];
 
   return (
-    <div className="py-16 px-4 sm:px-6 md:px-8 bg-black relative overflow-hidden">
+    <div className="py-10 sm:py-16 px-3 sm:px-6 md:px-8 bg-black relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-600/5 rounded-full filter blur-[100px] opacity-60"></div>
@@ -653,46 +695,44 @@ const TwitterTestimonials: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
             What People Are Saying
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-3 rounded-full"></div>
+          <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-2 sm:mt-3 rounded-full"></div>
         </div>
 
         {/* Pinterest-style masonry layout for testimonials */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
           {testimonials.map((testimonial, index) => (
-            <motion.div
+            <div
               key={testimonial.handle}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-800/70 
-                transition-all duration-200 shadow-xl break-inside-avoid mb-4
+              className="bg-gray-900/70 backdrop-blur-sm rounded-xl p-3 sm:p-5 border border-gray-800/70 
+                transition-all duration-200 shadow-xl break-inside-avoid mb-3 sm:mb-4
                 hover:bg-gray-800/70 hover:border-gray-700/70"
               style={{ height: "fit-content" }}
             >
-              <div className="flex items-center mb-3">
-                <div className="h-10 w-10 rounded-full overflow-hidden flex-shrink-0 bg-gray-800 border border-gray-700">
+              <div className="flex items-center mb-2 sm:mb-3">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden flex-shrink-0 bg-gray-800 border border-gray-700">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="font-medium text-white text-sm">
+                <div className="ml-2 sm:ml-3">
+                  <p className="font-medium text-white text-xs sm:text-sm">
                     {testimonial.name}
                   </p>
-                  <p className="text-gray-500 text-xs">{testimonial.handle}</p>
+                  <p className="text-gray-500 text-[10px] sm:text-xs">
+                    {testimonial.handle}
+                  </p>
                 </div>
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
                 {testimonial.text}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -701,8 +741,21 @@ const TwitterTestimonials: React.FC = () => {
 };
 
 const Landing: React.FC = () => {
+  // Add useEffect hook to apply styles directly to the body
+  useEffect(() => {
+    // Prevent overscroll white space
+    document.body.style.backgroundColor = "#000";
+    document.documentElement.style.backgroundColor = "#000";
+
+    // Cleanup on component unmount
+    return () => {
+      document.body.style.backgroundColor = "";
+      document.documentElement.style.backgroundColor = "";
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-gray-400 overflow-x-hidden relative">
+    <div className="min-h-screen bg-black text-gray-400 overflow-x-hidden relative overflow-y-hidden">
       {/* Network Pattern Overlay - Moved before Navbar */}
       <div className="network-grid" />
 
@@ -730,54 +783,54 @@ const Landing: React.FC = () => {
         {/* Fixed bottom gradient blur */}
         <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-[100] backdrop-blur-[2px]" />
 
-        {/* Hero Section */}
-        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-20">
+        {/* Hero Section with updated layout */}
+        <div className="relative min-h-[calc(100vh-60px)] flex flex-col items-center justify-start md:justify-center px-3 sm:px-6 md:px-8 py-8 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center w-full max-w-5xl mx-auto flex flex-col md:flex-row md:items-center justify-between min-h-[60vh] sm:h-[70vh] mt-16 sm:mt-0 gap-8"
+            className="text-center w-full max-w-5xl mx-auto flex flex-col md:flex-row md:items-center justify-between min-h-[40vh] sm:min-h-[60vh] mt-8 md:mt-0 gap-6 sm:gap-8"
           >
-            {/* Title and Content Group */}
+            {/* Title Section with buttons below on desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-6 md:w-1/2 text-left"
+              className="space-y-4 sm:space-y-6 md:w-1/2 text-center md:text-left mb-6 md:mb-0 mt-6 md:mt-0 w-full"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent px-2 sm:px-0 leading-tight pb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent leading-tight pb-1 sm:pb-2 px-4 sm:px-0">
                 Turn Every Book Into Lasting Knowledge
               </h1>
 
-              {/* Added CTA Button */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-start items-start pt-4">
+              {/* Desktop-only buttons below title */}
+              <div className="hidden md:flex flex-row gap-4 justify-start md:mt-4">
+                <button
+                  onClick={() =>
+                    window.open("https://www.tryknowledgevault.xyz", "_blank")
+                  }
+                  className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors text-lg font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30"
+                >
+                  Try It, Free
+                </button>
                 <button
                   onClick={() =>
                     document
                       .querySelector(".benefits-section")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors text-lg font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30"
-                >
-                  Learn More
-                </button>
-                <button
-                  onClick={() =>
-                    window.open("https://www.tryknowledgevault.xyz", "_blank")
-                  }
                   className="px-6 py-3 bg-transparent border border-gray-700 hover:border-blue-500/50 rounded-lg text-white transition-colors text-lg font-medium hover:bg-gray-800/30"
                 >
-                  Try It, Free
+                  Learn More
                 </button>
               </div>
             </motion.div>
 
-            {/* Hero Image */}
+            {/* Hero Image with increased bottom margin on mobile */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="md:w-1/2 relative"
+              className="md:w-1/2 relative w-full order-2 md:order-none mb-10 sm:mb-6 md:mb-0"
             >
               <div className="relative overflow-hidden rounded-xl shadow-2xl shadow-blue-500/10 border border-gray-800/60">
                 <img
@@ -793,19 +846,41 @@ const Landing: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="absolute -bottom-5 -left-5 bg-blue-600/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-blue-500/30 text-white text-sm font-medium"
+                className="absolute -bottom-3 sm:-bottom-5 -left-2 sm:-left-5 bg-blue-600/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-lg border border-blue-500/30 text-white text-xs sm:text-sm font-medium"
               >
                 AI-Powered Summaries
               </motion.div>
             </motion.div>
           </motion.div>
 
+          {/* Mobile-only CTA Buttons */}
+          <div className="md:hidden w-full max-w-xl mx-auto mt-2 flex flex-col sm:flex-row gap-3 justify-center items-center mb-8 px-4">
+            <button
+              onClick={() =>
+                window.open("https://www.tryknowledgevault.xyz", "_blank")
+              }
+              className="w-full px-5 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors text-base font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30"
+            >
+              Try It, Free
+            </button>
+            <button
+              onClick={() =>
+                document
+                  .querySelector(".benefits-section")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="w-full px-5 py-3 bg-transparent border border-gray-700 hover:border-blue-500/50 rounded-lg text-white transition-colors text-base font-medium hover:bg-gray-800/30"
+            >
+              Learn More
+            </button>
+          </div>
+
           {/* Features Section - Modified to be more compact */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-gray-400 text-lg flex flex-col items-center benefits-section px-2 sm:px-0 mt-12 md:mt-0"
+            className="text-gray-400 text-lg flex flex-col items-center benefits-section px-2 sm:px-0 mt-6 md:mt-0"
           ></motion.div>
 
           <ScrollIndicator />
@@ -874,15 +949,15 @@ const Landing: React.FC = () => {
 
         {/* Final CTA Section with enhanced visibility */}
         <div className="border-t border-gray-800 bg-gradient-to-t from-blue-900/20 to-transparent">
-          <div className="max-w-4xl mx-auto text-center px-4 py-20">
+          <div className="max-w-4xl mx-auto text-center px-4 py-12 sm:py-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
-              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
                 Ready to Supercharge Your Knowledge?
               </h2>
 
@@ -897,7 +972,7 @@ const Landing: React.FC = () => {
                 onClick={() =>
                   window.open("https://www.tryknowledgevault.xyz", "_blank")
                 }
-                className="px-8 py-4 bg-blue-600 text-white text-lg md:text-xl font-bold rounded-lg shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all duration-300 transform hover:translate-y-[-2px]"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white text-base sm:text-lg md:text-xl font-bold rounded-lg shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all duration-300 transform hover:translate-y-[-2px]"
               >
                 Try It Here
               </motion.button>
