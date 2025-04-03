@@ -597,61 +597,55 @@ const TwitterTestimonials: React.FC = () => {
     {
       name: "Brendan O'Leary",
       handle: "@olearycrew",
-      text: "I forget EVERYTHING i read but @knowledge_vault got me locked in. key stuff sticks now and i can pull it up like snap. brain hack fr. 🧠",
-      placeholder: "https://via.placeholder.com/60",
-    },
-    {
-      name: "Sveta Bay",
-      handle: "@sveta_bay",
-      text: "books used to be read it, done, bye. now @knowledge_vault’s got me stacking insights like a boss. my brain’s legit getting an upgrade.",
+      text: "I forget EVERYTHING I read but @knowledge_vault got me locked in. Key stuff sticks now. Brain hack. 🧠",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Jacky W",
       handle: "@jkhwongie",
-      text: "Been on @knowledge_vault for months and im HOOKED. u read, u keep the good shit, u don’t forget. sleep on this app and u lose.",
+      text: "Been on @knowledge_vault for months and im HOOKED. Don't sleep on this app.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Abhishek V",
       handle: "@abvijayvergiya",
-      text: "Used to doomscroll all day, swapped it for @knowledge_vault. Now i’m leveling up daily. no cap, this app’s a W.",
+      text: "Used to doomscroll all day, swapped it for @knowledge_vault. Now i’m leveling up daily.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Gino",
       handle: "@Devmesis",
-      text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is that cheat code i didn’t even know i was missing.",
+      text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is that cheat code you didn’t even know you was missing.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Sukh",
       handle: "@thisissukh_",
-      text: "Bought @knowledge_vault day one. Them AI summaries? Sexy af and my brain loves it. 💫",
+      text: "Bought @knowledge_vault day one, haven't left since. 💫",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Stephan Meijer",
       handle: "@meijer_s",
-      text: "All my fave quotes, searchable in like 2 secs. @knowledge_vault took my messy highlights and made em gold.",
+      text: "All my fave quotes, searchable in like 2 secs. @knowledge_vault.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Zulal • Designer",
       handle: "@zee7",
-      text: "I suck at summaries but @knowledge_vault does it for me. edits are quick, keeps me sharp, no burnout. clutch af.",
+      text: "I don't have time to summarise what I read, but @knowledge_vault does it for me. Edits are quick, keeps me sharp, no burnout.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Miguel Rengifo",
       handle: "@miguelreng",
-      text: "No time to read full books? Me neither. @knowledge_vault summarizes it, i vibe w it, then i go deeper. workflow’s never been this clean.",
+      text: "No time to read full books? Me neither. @knowledge_vault I vibe w it.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Rachel Kim",
       handle: "@rachelreads",
-      text: "Ok @knowledge_vault is wild,, linked up ideas across books i love. my fave authors been saying the same shit this whole time. mind blown. 🤯",
+      text: "Ok @knowledge_vault is wild,, linked up ideas across books I love.🤯",
       placeholder: "https://via.placeholder.com/60",
     },
     {
@@ -932,7 +926,7 @@ const Landing: React.FC = () => {
                 }
                 className="px-8 py-4 bg-blue-600 text-white text-lg md:text-xl font-bold rounded-lg shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all duration-300 transform hover:translate-y-[-2px]"
               >
-                Ready to level up?
+                Try Free
               </motion.button>
             </motion.div>
           </div>
