@@ -597,7 +597,7 @@ const TwitterTestimonials: React.FC = () => {
     {
       name: "Brendan O'Leary",
       handle: "@olearycrew",
-      text: "I forget EVERYTHING I read but @knowledge_vault got me locked in. Key stuff sticks now. Brain hack. 🧠",
+      text: "I forget EVERYTHING I read but with @knowledge_vault key stuff sticks now. Brain hack. 🧠",
       placeholder: "https://via.placeholder.com/60",
     },
     {
@@ -609,13 +609,13 @@ const TwitterTestimonials: React.FC = () => {
     {
       name: "Abhishek V",
       handle: "@abvijayvergiya",
-      text: "Used to doomscroll all day, swapped it for @knowledge_vault. Now i’m leveling up daily.",
+      text: "Used to doomscroll, swapped it for @knowledge_vault.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Gino",
       handle: "@Devmesis",
-      text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is that cheat code you didn’t even know you was missing.",
+      text: "Cut 40+ hrs of reading and still know more?? @knowledge_vault is a cheat code.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
@@ -633,13 +633,13 @@ const TwitterTestimonials: React.FC = () => {
     {
       name: "Zulal • Designer",
       handle: "@zee7",
-      text: "I don't have time to summarise what I read, but @knowledge_vault does it for me. Edits are quick, keeps me sharp, no burnout.",
+      text: "I don't have time to summarise what I read, but @knowledge_vault does it for me. Edits are quick, and it keeps me sharp.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
       name: "Miguel Rengifo",
       handle: "@miguelreng",
-      text: "No time to read full books? Me neither. @knowledge_vault I vibe w it.",
+      text: "No time to read full books? Me neither. @knowledge_vault.",
       placeholder: "https://via.placeholder.com/60",
     },
     {
