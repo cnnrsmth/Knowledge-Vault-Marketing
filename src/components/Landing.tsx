@@ -631,7 +631,7 @@ const TwitterTestimonials: React.FC = () => {
       placeholder: "https://via.placeholder.com/60",
     },
     {
-      name: "Zulal • Designer",
+      name: "Zulal",
       handle: "@zee7",
       text: "I don't have time to summarise what I read, but @knowledge_vault does it for me. Edits are quick, and it keeps me sharp.",
       placeholder: "https://via.placeholder.com/60",
