@@ -461,29 +461,33 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
               <p className="text-gray-400 text-sm sm:text-base">
                 {index === 0 &&
                   item === 1 &&
-                  "Summarise any book in seconds with AI"}
+                  "Search and summarise any book in seconds"}
                 {index === 0 &&
                   item === 2 &&
-                  "Extract key insights and actionable takeaways"}
-                {index === 0 && item === 3 && "Save hours of note taking time"}
+                  "Synthesise key takeaways, quotes, and notes"}
+                {index === 0 &&
+                  item === 3 &&
+                  "Make edits to summaries so they're more, you"}
 
                 {index === 1 &&
                   item === 1 &&
                   "Organise all your books in one place"}
                 {index === 1 &&
                   item === 2 &&
-                  "Seamlessly update your books and content"}
-                {index === 1 && item === 3 && "Recall information with ease"}
+                  "View key takeaways by book, topic, author and more"}
+                {index === 1 &&
+                  item === 3 &&
+                  "Your own AI assistant that knows your books inside and out... coming soon"}
 
                 {index === 2 &&
                   item === 1 &&
-                  "Find exactly what you need with with dynamic search and filters"}
+                  "Search and filters that adapt in real time, as your book list evolves"}
                 {index === 2 &&
                   item === 2 &&
-                  "Filter by categories, topics, or custom tags"}
+                  "Frictionlessly search across all your books for key learnings"}
                 {index === 2 &&
                   item === 3 &&
-                  "Connect insights across different books"}
+                  "Connect insights across everything you've read"}
               </p>
             </motion.div>
           ))}
@@ -512,17 +516,17 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
           ease: "easeInOut",
         }}
       >
-        {/* Video Container with SaaS-like styling */}
-        <div className="w-full relative rounded-xl overflow-hidden shadow-2xl group transition-all duration-300 transform hover:scale-[1.02] hover:shadow-blue-500/20 feature-float">
-          {/* Video Overlay for style */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent z-10 pointer-events-none group-hover:from-blue-900/40 transition-all duration-300"></div>
+        {/* Video Container without hover glow or bouncing animation */}
+        <div className="w-full relative rounded-xl overflow-hidden shadow-2xl group transition-all duration-300">
+          {/* Remove glow overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent z-10 pointer-events-none"></div>
 
           {/* Video Element or GIF based on index */}
-          <div className="relative rounded-xl overflow-hidden border border-gray-700/60 group-hover:border-blue-500/30 transition-all duration-300">
+          <div className="relative rounded-xl overflow-hidden border border-gray-700/60 transition-all duration-300">
             {index === 0 ? (
               <img
                 src={InstantBookSummariesGif}
-                alt="Instant book summaries that save you time"
+                alt="Save time with instant book summaries"
                 className="w-full h-auto"
               />
             ) : index === 1 ? (
@@ -902,8 +906,8 @@ const Landing: React.FC = () => {
 
               <FeatureSection
                 icon={faWandMagicSparkles}
-                title="Instant Book Summaries That Save You Time"
-                description="Get clear, concise summaries of every book you consume."
+                title="Save time with instant book summaries"
+                description="Our AI does the heavy lifting for you."
                 isFirstSection={true}
                 index={0}
               />
@@ -918,7 +922,7 @@ const Landing: React.FC = () => {
 
               <FeatureSection
                 icon={faBookOpen}
-                title="All Your Book Summaries, Organised in One Place"
+                title="Turn your reading into lasting knowledge"
                 description="Never lose track of what you've read again."
                 isReversed
                 index={1}
@@ -934,8 +938,8 @@ const Landing: React.FC = () => {
 
               <FeatureSection
                 icon={faSearch}
-                title="Instantly Find What Matters"
-                description="Effortlessly navigate with powerful search and filters. "
+                title="Find exactly what you need, and quickly"
+                description="Navigate with powerful search and filters. "
                 index={2}
               />
             </div>
