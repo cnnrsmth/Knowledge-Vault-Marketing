@@ -128,8 +128,11 @@ const Navbar: React.FC = () => {
                 >
                   How It Works
                 </button>
-                <a
-                  href="#features"
+                <button
+                  onClick={() => {
+                    const featuresSection = document.querySelector("#features");
+                    featuresSection?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   className={`${
                     isDarkMode
                       ? "text-white hover:text-blue-300"
@@ -137,7 +140,7 @@ const Navbar: React.FC = () => {
                   } transition-colors text-sm`}
                 >
                   Features
-                </a>
+                </button>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -205,9 +208,13 @@ const Navbar: React.FC = () => {
                     >
                       How It Works
                     </button>
-                    <a
-                      href="#features"
-                      onClick={() => setIsMenuOpen(false)}
+                    <button
+                      onClick={() => {
+                        const featuresSection =
+                          document.querySelector("#features");
+                        featuresSection?.scrollIntoView({ behavior: "smooth" });
+                        setIsMenuOpen(false);
+                      }}
                       className={`${
                         isDarkMode
                           ? "text-white hover:text-blue-300"
@@ -215,7 +222,7 @@ const Navbar: React.FC = () => {
                       } transition-colors text-sm py-2 text-center`}
                     >
                       Features
-                    </a>
+                    </button>
                     <button
                       onClick={() => {
                         window.open(

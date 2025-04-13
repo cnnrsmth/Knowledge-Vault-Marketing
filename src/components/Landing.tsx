@@ -2042,6 +2042,7 @@ const Landing: React.FC = () => {
 
         {/* Feature Breakdown Section */}
         <div
+          id="features"
           className={`feature-breakdown-section relative py-24 sm:py-32 ${
             isDarkMode
               ? "border-t border-gray-800/50"
