@@ -1,12 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Landing from "./components/Landing";
+import { ThemeProvider } from "./hooks/useTheme";
 
 function App() {
   return (
-    <Router>
-      <Landing />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Landing />
+      </Router>
+    </ThemeProvider>
   );
 }
 
