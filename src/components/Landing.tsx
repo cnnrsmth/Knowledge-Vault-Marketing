@@ -2030,7 +2030,7 @@ const Landing: React.FC = () => {
                     : "from-gray-900 to-blue-600"
                 } bg-clip-text text-transparent`}
               >
-                Get started in 5 simple steps
+                Get started in 3 simple steps
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-4 rounded-full"></div>
             </div>
@@ -2057,7 +2057,7 @@ const Landing: React.FC = () => {
                     : "from-gray-900 to-blue-600"
                 } bg-clip-text text-transparent`}
               >
-                What You Can Do with Knowledge Vault
+                Reap the Rewards
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-4 rounded-full"></div>
             </div>
