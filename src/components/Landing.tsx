@@ -926,12 +926,17 @@ const TwitterTestimonials: React.FC = () => {
                     Pro
                   </h3>
                   <div className="flex flex-col items-center justify-center">
-                    <div
-                      className={`mt-2 text-4xl font-bold ${
-                        isDarkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      £5
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-gray-400 text-lg line-through">
+                        £9.99
+                      </span>
+                      <div
+                        className={`text-4xl font-bold ${
+                          isDarkMode ? "text-white" : "text-gray-900"
+                        }`}
+                      >
+                        £4.99
+                      </div>
                     </div>
                     <div className="text-gray-400 text-sm">per month</div>
                   </div>
@@ -1792,13 +1797,25 @@ const Landing: React.FC = () => {
               className="space-y-4 sm:space-y-6 md:w-1/2 text-center md:text-left mb-6 md:mb-0 mt-6 md:mt-0 w-full"
             >
               <h1
-                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 bg-gradient-to-r ${
-                  isDarkMode
-                    ? "from-white to-blue-300"
-                    : "from-gray-900 to-blue-700"
-                } bg-clip-text text-transparent leading-tight pb-1 sm:pb-2 px-4 sm:px-0`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight pb-1 sm:pb-2 px-4 sm:px-0`}
               >
-                Turn Every Book into Lasting Knowledge.
+                <span className={isDarkMode ? "text-white" : "text-gray-900"}>
+                  Turn Every{" "}
+                </span>
+                <span className="text-blue-500" style={{ color: "#4285F4" }}>
+                  Book
+                </span>
+                <br className="hidden sm:block" />
+                <span className={isDarkMode ? "text-white" : "text-gray-900"}>
+                  into{" "}
+                </span>
+                <span className="text-blue-500" style={{ color: "#4285F4" }}>
+                  Lasting
+                </span>
+                <span className={isDarkMode ? "text-white" : "text-gray-900"}>
+                  {" "}
+                  Knowledge.
+                </span>
               </h1>
 
               <p
@@ -2234,6 +2251,229 @@ const Landing: React.FC = () => {
         {/* Testimonial Section */}
         <div className="border-t border-gray-800/50 bg-black relative overflow-hidden">
           <TwitterTestimonials />
+        </div>
+
+        {/* Add Public Vaults Section */}
+        <div
+          className={`public-vaults-section relative py-16 sm:py-20 ${
+            isDarkMode
+              ? "border-t border-gray-800/50"
+              : "border-t border-gray-200/50"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2
+                className={`text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r ${
+                  isDarkMode
+                    ? "from-white to-blue-300"
+                    : "from-gray-900 to-blue-600"
+                } bg-clip-text text-transparent`}
+              >
+                Featured Knowledge Vaults
+              </h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto mt-3 rounded-full"></div>
+              <p
+                className={`mt-4 max-w-2xl mx-auto text-lg ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
+                Explore the minds of well-known thinkers, creators, and
+                entrepreneurs. Discover the books they've read, their notes, and
+                wisdom distilled by our AI.
+              </p>
+            </div>
+
+            {/* Featured Vaults Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {/* Featured Vault Card 1 - Ali Abdaal */}
+              <div
+                className={`${
+                  isDarkMode
+                    ? "bg-gray-900/70 border-gray-800/70 hover:bg-gray-800/70 hover:border-gray-700/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                } backdrop-blur-sm rounded-xl p-6 border transition-all duration-200 shadow-xl transform hover:-translate-y-1`}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4 bg-gray-800">
+                    <img
+                      src="https://aliabdaal.com/wp-content/uploads/2024/09/hero-ali.png"
+                      alt="Ali Abdaal"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3
+                    className={`text-xl font-bold ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    } mb-1`}
+                  >
+                    Ali Abdaal
+                  </h3>
+                  <p className="text-blue-500 font-medium text-sm mb-3">
+                    @aliabdaal
+                  </p>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    } text-center mb-4`}
+                  >
+                    Doctor turned YouTuber who writes about productivity and
+                    evidence-based self-improvement.
+                  </p>
+                  <button className="px-4 py-1.5 rounded-full text-sm font-medium bg-[#1a202c] text-gray-400 hover:bg-[#1f2937] hover:text-gray-300">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+
+              {/* Featured Vault Card 2 - Chris Williamson */}
+              <div
+                className={`${
+                  isDarkMode
+                    ? "bg-gray-900/70 border-gray-800/70 hover:bg-gray-800/70 hover:border-gray-700/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                } backdrop-blur-sm rounded-xl p-6 border transition-all duration-200 shadow-xl transform hover:-translate-y-1`}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4 bg-gray-800">
+                    <img
+                      src="https://pbs.twimg.com/profile_images/1612136768194625536/7HdwNsOD_400x400.jpg"
+                      alt="Chris Williamson"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3
+                    className={`text-xl font-bold ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    } mb-1`}
+                  >
+                    Chris Williamson
+                  </h3>
+                  <p className="text-blue-500 font-medium text-sm mb-3">
+                    @ChrisWillx
+                  </p>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    } text-center mb-4`}
+                  >
+                    Host of the Modern Wisdom podcast, exploring philosophy,
+                    science, and self-development.
+                  </p>
+                  <button className="px-4 py-1.5 rounded-full text-sm font-medium bg-[#1a202c] text-gray-400 hover:bg-[#1f2937] hover:text-gray-300">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+
+              {/* Featured Vault Card 3 - Naval Ravikant */}
+              <div
+                className={`${
+                  isDarkMode
+                    ? "bg-gray-900/70 border-gray-800/70 hover:bg-gray-800/70 hover:border-gray-700/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                } backdrop-blur-sm rounded-xl p-6 border transition-all duration-200 shadow-xl transform hover:-translate-y-1`}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4 bg-gray-800">
+                    <img
+                      src="https://pbs.twimg.com/profile_images/1350045723073671169/xB1_K1_z_400x400.jpg"
+                      alt="Naval Ravikant"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3
+                    className={`text-xl font-bold ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    } mb-1`}
+                  >
+                    Naval Ravikant
+                  </h3>
+                  <p className="text-blue-500 font-medium text-sm mb-3">
+                    @naval
+                  </p>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    } text-center mb-4`}
+                  >
+                    Entrepreneur and investor known for his thoughts on
+                    startups, investing, and personal growth.
+                  </p>
+                  <button className="px-4 py-1.5 rounded-full text-sm font-medium bg-[#1a202c] text-gray-400 hover:bg-[#1f2937] hover:text-gray-300">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+
+              {/* Featured Vault Card 4 - Tim Ferriss */}
+              <div
+                className={`${
+                  isDarkMode
+                    ? "bg-gray-900/70 border-gray-800/70 hover:bg-gray-800/70 hover:border-gray-700/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                } backdrop-blur-sm rounded-xl p-6 border transition-all duration-200 shadow-xl transform hover:-translate-y-1`}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4 bg-gray-800">
+                    <img
+                      src="https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s900-c-k-c0x00ffffff-no-rj"
+                      alt="Tim Ferriss"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3
+                    className={`text-xl font-bold ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    } mb-1`}
+                  >
+                    Tim Ferriss
+                  </h3>
+                  <p className="text-blue-500 font-medium text-sm mb-3">
+                    @tferriss
+                  </p>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    } text-center mb-4`}
+                  >
+                    Author of 'The 4-Hour Workweek' and host of 'The Tim Ferriss
+                    Show' podcast.
+                  </p>
+                  <button className="px-4 py-1.5 rounded-full text-sm font-medium bg-[#1a202c] text-gray-400 hover:bg-[#1f2937] hover:text-gray-300">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-12">
+              <button
+                onClick={() =>
+                  window.open(
+                    "https://www.tryknowledgevault.xyz/vault",
+                    "_blank"
+                  )
+                }
+                className="px-6 py-3 bg-[#3B82F6] hover:bg-[#2563eb] rounded-lg text-white transition-colors font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 flex items-center mx-auto"
+              >
+                <span>Explore All Featured Vaults</span>
+                <svg
+                  className="ml-2 h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Final CTA Section with enhanced visibility */}

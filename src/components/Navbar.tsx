@@ -141,6 +141,21 @@ const Navbar: React.FC = () => {
                 >
                   Features
                 </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://www.tryknowledgevault.xyz/vault",
+                      "_blank"
+                    )
+                  }
+                  className={`${
+                    isDarkMode
+                      ? "text-white hover:text-blue-300"
+                      : "text-gray-800 hover:text-blue-600"
+                  } transition-colors text-sm`}
+                >
+                  Featured Vaults
+                </button>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -222,6 +237,22 @@ const Navbar: React.FC = () => {
                       } transition-colors text-sm py-2 text-center`}
                     >
                       Features
+                    </button>
+                    <button
+                      onClick={() => {
+                        window.open(
+                          "https://www.tryknowledgevault.xyz/vault",
+                          "_blank"
+                        );
+                        setIsMenuOpen(false);
+                      }}
+                      className={`${
+                        isDarkMode
+                          ? "text-white hover:text-blue-300"
+                          : "text-gray-800 hover:text-blue-600"
+                      } transition-colors text-sm py-2 text-center`}
+                    >
+                      Featured Vaults
                     </button>
                     <button
                       onClick={() => {
