@@ -891,7 +891,7 @@ const TwitterTestimonials: React.FC = () => {
                       icon={faCheck}
                       className="text-green-400 mr-2"
                     />
-                    3 AI Generated Summaries
+                    10 AI Generated Summaries
                   </li>
                 </ul>
                 <div className="mt-6">
@@ -1803,7 +1803,7 @@ const Landing: React.FC = () => {
                   Turn Every{" "}
                 </span>
                 <span className="text-blue-500" style={{ color: "#4285F4" }}>
-                  Book
+                  Book{" "}
                 </span>
                 <br className="hidden sm:block" />
                 <span className={isDarkMode ? "text-white" : "text-gray-900"}>
@@ -2279,8 +2279,8 @@ const Landing: React.FC = () => {
                 }`}
               >
                 Explore the minds of well-known thinkers, creators, and
-                entrepreneurs. Discover the books they've read, their notes, and
-                wisdom distilled by our AI.
+                entrepreneurs. Discover the books they've read, and our AI
+                distilled notes.
               </p>
             </div>
 
